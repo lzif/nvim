@@ -88,13 +88,6 @@ return {
 		    	typescriptreact = { "prettierd" },
 		    },
 			})
-			vim.keymap.set({ "n", "v" }, "<C-p>", function()
-			  conform.format({
-				  lsp_fallback = true,
-				  async = false,
-				  timeout_ms = 5000,
-				})
-			end, { desc = "Format file or range (in visual mode)" })
 		end,
 	},
 }

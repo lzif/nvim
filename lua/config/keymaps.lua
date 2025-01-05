@@ -21,3 +21,11 @@ end)
 vim.keymap.set('i', '<C-s>', '<Esc>:w<CR>a')  -- Save dan kembali ke insert
 
 vim.keymap.set('n', '<C-h>', ':noh<CR>')  -- Clear highlight search
+
+vim.keymap.set({ "n", "v" }, "<C-p>", function()
+	conform.format({
+		lsp_fallback = true,
+		async = false,
+		timeout_ms = 5000,
+	})
+end)
