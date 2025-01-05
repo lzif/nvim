@@ -22,6 +22,8 @@ return {
   },
 	{
     'akinsho/bufferline.nvim',
+		lazy = true,
+    event = "BufRead",
     version = "*",
     dependencies = 'nvim-tree/nvim-web-devicons',
     config = function()
@@ -31,8 +33,8 @@ return {
 						style = "icon"
 					},
           show_close_icon = true,
-          diagnostics = "nvim_lsp", -- Tampilkan error/warning dari LSP
-          separator_style = "slant", -- Gaya separator (opsional)
+          diagnostics = "nvim_lsp",
+          separator_style = "slant",
       },
     }
     end
@@ -72,5 +74,27 @@ return {
 	  config = function()
     	require("nvim-autopairs").setup({})
 	  end
-	}
+	},
+	{
+		"stevearc/conform.nvim",
+		event = { "BufReadPre", "BufNewFile" },
+	  config = function()
+	    local conform = require("conform")
+	    conform.setup({
+		    log_level = vim.log.levels.DEBUG,
+		    formatters_by_ft = {
+		    	javascript = { "prettierd" },
+		    	typescript = { "prettierd" },
+		    	typescriptreact = { "prettierd" },
+		    },
+			})
+			vim.keymap.set({ "n", "v" }, "<C-p>", function()
+			  conform.format({
+				  lsp_fallback = true,
+				  async = false,
+				  timeout_ms = 5000,
+				})
+			end, { desc = "Format file or range (in visual mode)" })
+		end,
+	},
 }
