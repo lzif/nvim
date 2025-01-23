@@ -2,12 +2,30 @@ return {
   {
     "folke/tokyonight.nvim",
     lazy = false,
-    priority = 1000,
-    config = function()
-      vim.cmd([[colorscheme tokyonight]])
-    end,
+    priority = 1000
   },
-
+	{
+		"catppuccin/nvim",
+		name = "catppuccin",
+		priority = 1000,
+		config = function ()
+			vim.cmd([[colorscheme catppuccin]])
+			require("catppuccin").setup {
+				flavour = "mocha",
+				integrations = {
+					cmp = true,
+	        gitsigns = true,
+	        nvimtree = true,
+	        treesitter = true,
+					indent_blankline = {
+				    enabled = true,
+				    scope_color = "mocha",
+				    colored_indent_levels = true,
+					},
+				}
+			}
+		end
+	},
   { "nvim-tree/nvim-web-devicons", lazy = true },
   {
     "nvim-tree/nvim-tree.lua",
@@ -28,6 +46,7 @@ return {
     dependencies = 'nvim-tree/nvim-web-devicons',
     config = function()
       require("bufferline").setup {
+				highlights = require("catppuccin.groups.integrations.bufferline").get(),
         options = {
 					indicator = {
 						style = "icon"
@@ -44,7 +63,7 @@ return {
 		event = 'VeryLazy',
 		opts = {
   	  options = {
-      	theme = 'tokyonight',
+      	theme = 'catppuccin',
 				icons_enabled = true,
     	  disabled_filetypes = {
       		statusline = {'NvimTree'}
@@ -90,4 +109,5 @@ return {
 			})
 		end,
 	},
+	{ "github/copilot.vim" }
 }

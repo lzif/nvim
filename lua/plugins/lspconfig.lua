@@ -43,12 +43,14 @@ return {
 	  local lspconfig = require('lspconfig')
 	  local lsp_capabilities = require('cmp_nvim_lsp').default_capabilities()
 
-		lspconfig.rust_analyzer.setup({
+		lspconfig.lua_ls.setup({
 			capabilities = lsp_capabilities
 		})
+
 	  require('mason-lspconfig').setup({
 	    ensure_installed = {
 	      'ts_ls',
+				'emmet_language_server'
 	    },
 	    handlers = {
 	      function(server)
@@ -66,6 +68,12 @@ return {
 	          }
 	        })
 	      end,
+				['emmet_language_server'] = function ()
+					lspconfig.emmet_language_server.setup({
+						filetypes = { "css", "eruby", "html", "javascript", "javascriptreact", "less", "sass", "scss", "pug", "typescriptreact" },
+						capabilities = lsp_capabilities
+					})
+				end
 	    }
 	  })
 	end
