@@ -18,7 +18,6 @@ This is a minimal and efficient Neovim configuration built from scratch with ess
    git clone https://github.com/lzif/nvim ~/.config/nvim
    ```
 
-<<<<<<< HEAD
 ```bash
 nvim
 ```
@@ -91,5 +90,3 @@ Here’s a list of essential keybindings to enhance your productivity:
 - **Telescope**: A powerful fuzzy finder for searching files, text, and buffers.
 - **Conform**: A plugin for formatting files with LSP fallback and synchronous execution.
 
----
->>>>>>> fb526b19988277577af25c19f75daf72be36f349
