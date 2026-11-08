@@ -6,7 +6,6 @@ vim.opt.sidescrolloff = 8
 vim.opt.numberwidth = 2
 vim.opt.signcolumn = "yes"
 vim.opt.termguicolors = true
-vim.opt.cursorline = true
 
 -- Search
 vim.opt.ignorecase = true

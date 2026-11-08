@@ -1,10 +1,6 @@
-local load = function(mod)
-	package.loaded[mod] = nil
-	require(mod)
-end
+vim.g.mapleader = " "
+vim.g.maplocalleader = " "
 
-load("config.settings")
--- load('config.commands')
-load("config.keymaps")
-
+require("config.settings")
+require("config.keymaps")
 require("config.lazy")

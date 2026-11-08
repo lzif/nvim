@@ -4,13 +4,11 @@ return {
 		name = "catppuccin",
 		priority = 1000,
 		config = function()
-			vim.cmd([[colorscheme catppuccin]])
 			require("catppuccin").setup({
 				flavour = "mocha",
 				integrations = {
 					cmp = true,
 					gitsigns = true,
-					nvimtree = true,
 					treesitter = true,
 					indent_blankline = {
 						enabled = true,
@@ -18,6 +16,7 @@ return {
 					},
 				},
 			})
+			vim.cmd.colorscheme("catppuccin")
 		end,
 	},
 	{
@@ -37,7 +36,7 @@ return {
 					async = false,
 					timeout_ms = 5000,
 				},
-				log_level = vim.log.levels.DEBUG,
+				log_level = vim.log.levels.WARN,
 				formatters_by_ft = {
 					javascript = { "biome", "prettierd", stop_after_first = true },
 					typescript = { "biome", "prettierd", stop_after_first = true },
@@ -46,6 +45,8 @@ return {
 					json = { "biome" },
 					lua = { "stylua" },
 					css = { "prettierd" },
+					go = { "goimports", "gofmt", stop_after_first = true },
+					rust = { "rustfmt" },
 				},
 			})
 		end,
