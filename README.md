@@ -30,7 +30,7 @@ Plugins install automatically on first launch via lazy.nvim.
 
 - Neovim 0.11.5+
 - Go toolchain, for gopls, gofmt, and goimports. Go must be installed at mason-install time, not only at runtime: mason builds gopls with the local `go` toolchain. Install goimports with `go install golang.org/x/tools/cmd/goimports@latest`.
-- Rust toolchain, for rust_analyzer and rustfmt. Termux note: mason may fail to resolve a rust-analyzer asset on Termux/Bionic (no matching asset, get_libc returns nil). If `:MasonInstall rust-analyzer` fails there, remove `rust_analyzer` from `ensure_installed` in `lua/plugins/lspconfig.lua` and install it via rustup instead. Whether `pkg install rust` or rustup was used is not verified on Termux yet.
+- Rust toolchain, for rust_analyzer and rustfmt: `pkg install rust rust-analyzer` (rust includes rustfmt; there is no separate rustfmt package in Termux). rust_analyzer is deliberately NOT mason-managed: mason's rust-analyzer binary is glibc and cannot run on Termux (Bionic), Neovim fails to spawn it with "language server is either not installed, missing from PATH, or not executable". The config enables rust_analyzer only when the `rust-analyzer` binary is on PATH. Do NOT `:MasonInstall rust-analyzer`; if mason already installed a broken copy, remove it with `:MasonUninstall rust-analyzer`.
 - make + a C compiler, for telescope-fzf-native.
 - tree-sitter CLI >= 0.26.1, plus tar, curl, and a C compiler, for installing treesitter parsers. On Termux, install it with `pkg install tree-sitter` (0.27.2):
   ```bash
@@ -44,7 +44,7 @@ Plugins install automatically on first launch via lazy.nvim.
 
 ## LSP servers
 
-Installed via mason-lspconfig `ensure_installed`: emmet_language_server, svelte, lua_ls, gopls, rust_analyzer. TypeScript is covered by typescript-tools.nvim, not by ts_ls, so no second TS server runs.
+Installed via mason-lspconfig `ensure_installed`: emmet_language_server, svelte, lua_ls, gopls. rust_analyzer comes from the system package manager instead (see Prerequisites), not from mason. TypeScript is covered by typescript-tools.nvim, not by ts_ls, so no second TS server runs.
 
 ## Formatters
 

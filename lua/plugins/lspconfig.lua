@@ -87,11 +87,18 @@ return {
 				"svelte",
 				"lua_ls",
 				"gopls",
-				"rust_analyzer",
 			},
 			automatic_enable = {
 				exclude = { "ts_ls" },
 			},
 		})
+
+		-- rust_analyzer is NOT mason-managed: mason's binary is glibc and
+		-- cannot run on Termux (Bionic). Install it from Termux instead
+		-- (`pkg install rust-analyzer`) and enable it only when the binary
+		-- is actually on PATH, so a machine without it stays quiet.
+		if vim.fn.executable("rust-analyzer") == 1 then
+			vim.lsp.enable("rust_analyzer")
+		end
 	end,
 }
